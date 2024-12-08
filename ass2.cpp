@@ -16,9 +16,10 @@ public:
     void cpyless(int n);
     int  count(int n);
     void temparray();
-    void deldup(int n);
+    void deldup(int& n);
 }b[100],c[100],t[100];
                                     
+
 void book::accept()
 {
      cout << "Enter the name,author and cost of the book ";
@@ -110,7 +111,7 @@ void book:: desc(int n)
         if(strcmp(b[i].name , t[j].name)==0)
          {
            
-           y=1;
+            y=1;
             break;
         }
        
@@ -123,32 +124,36 @@ void book:: desc(int n)
         }
        
     }
-    for(i=0;i<=k;i++)
-    t[i].display();
+    for(i=0;i<=k;i++){
+    t[i].display();}
 }
 
 
-void book::deldup(int n) 
+void book::deldup(int& n) 
 {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++) 
     {
         for (int j = i + 1; j < n; j++) 
         {
-            if (b[i].name == b[j].name && b[i].auth == b[j].auth) 
+            // Compare names and authors using strcmp
+            if (strcmp(b[i].name, b[j].name) == 0 && strcmp(b[i].auth, b[j].auth) == 0) 
             {
-                for (int k = j; k < n - 1; k++) {
+                // Shift the elements to remove the duplicate
+                for (int k = j; k < n - 1; k++) 
+                {
                     b[k] = b[k + 1];
                 }
-                n--; 
-                j--; 
+                n--; // Reduce the count of books
+                j--; // Adjust the index to recheck the current position
             }
         }
     }
-     for (int i = 0; i<n ; i++)
+    for (int i = 0; i < n; i++) 
     {
         b[i].display();
     }
 }
+
  int main()
  {  book temp;
     int choice,i;
